@@ -30,9 +30,9 @@ a:hover {
   align-items: center;
   padding: 0.5rem;
 }
-.header a:hover{
-    color: orange;
-  }
+.header a:hover {
+  color: orange;
+}
 .main {
   grid-area: "main";
 }
@@ -99,5 +99,38 @@ a:hover {
   height: 100%;
 }
 .product-rating {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* side bar*/
+.brand button {
+  font-size: 3rem;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+.sidebar {
+  position: fixed;
+  transform: translateX(-30rem);
+  width: 30rem;
+  background-color: lightgray;
+  height: 100%;
+}
+.sidebar.open {
+  transform: translateX(0);
+}
+.sidebar-close-button {
+  border-radius: 50%;
+  border-radius: 0.3rem black solid;
+  width: 3rem;
+  height: 3rem;
+  padding: 0.5rem;
+  font-size: 2rem;
+  padding-top: 0;
+  cursor: pointer;
+  position: absolute;
+  right: 1rem;
+  top: 1.5rem;
 }
