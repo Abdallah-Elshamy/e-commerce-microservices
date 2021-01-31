@@ -1,6 +1,7 @@
 const data = {
   products: [
     {
+      _id: "1",
       name: "shirt",
       image: "/images/shirt.webp",
       category: "shirt",
@@ -10,6 +11,7 @@ const data = {
       num_reviews: 10,
     },
     {
+      _id: "2",
       name: "shirt",
       image: "/images/shirt.webp",
       category: "shirt",
@@ -19,6 +21,7 @@ const data = {
       num_reviews: 10,
     },
     {
+      _id: "3",
       name: "shirt",
       image: "/images/shirt.webp",
       category: "shirt",
