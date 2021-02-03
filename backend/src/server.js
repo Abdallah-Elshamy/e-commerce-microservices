@@ -1,10 +1,13 @@
 import express from "express";
+import cors from "cors";
 
 const app = express();
 
+app.use(cors())
+
 app.get("/api/products", (req, res) => {
    console.log("here");
-  res.send({
+  res.send([{
     _id: "1",
     name: "shirt",
     image: "/images/shirt.webp",
@@ -13,7 +16,7 @@ app.get("/api/products", (req, res) => {
     brand: "Nike",
     rating: 4.5,
     num_reviews: 10,
-  });
+  }]);
 });
 
 app.listen(5000, () => {
