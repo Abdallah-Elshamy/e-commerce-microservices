@@ -5,7 +5,7 @@ const app = express();
 
 app.use(cors())
 
-app.get("/api/products", (req, res) => {
+app.get("/api/v0/products", (req, res) => {
    console.log("here");
   res.send([{
     _id: "1",
