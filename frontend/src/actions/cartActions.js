@@ -1,6 +1,6 @@
 import axios from "axios";
 import { apiEndpoint } from "../config";
-import { CART_ADD_ITEM } from "../constants/cartConstant";
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../constants/cartConstant";
 
 const addToCart = (productId, qty) => async (dispatch) => {
   try {
@@ -19,4 +19,13 @@ const addToCart = (productId, qty) => async (dispatch) => {
   } catch (error) {}
 };
 
-export { addToCart }
+const removeFromCart = (productId) => (dispatch) => {
+  try {
+    dispatch({
+      type: CART_REMOVE_ITEM,
+      payload: productId,
+    });
+  } catch (error) {}
+};
+
+export { addToCart, removeFromCart };
