@@ -1,6 +1,10 @@
 import express from "express";
 import { IndexRouter } from "./controllers/v0/index.router.js"
 import cors from "cors";
+import dotenv from "dotenv";
+import config from "./config"
+
+dotenv.config()
 
 const app = express();
 
