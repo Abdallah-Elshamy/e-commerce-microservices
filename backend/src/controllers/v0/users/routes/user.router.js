@@ -28,7 +28,7 @@ router.post("/login", async (req, res) => {
   });
 });
 
-router.post("/register", async (req, res) => {
+router.post("/", async (req, res) => {
   console.log(req.body);
   const user = new User({
     name: req.body.name,

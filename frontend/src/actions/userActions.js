@@ -27,7 +27,7 @@ const login = (email, password) => async (dispatch) => {
 const register = (name, email, password) => async (dispatch) => {
   dispatch({ type: USER_REGISTER_REQUEST, payload: { name, email, password } });
   try {
-    const { data } = await Axios.post(apiEndpoint + "/users/register", {
+    const { data } = await Axios.post(apiEndpoint + "/users", {
       name,
       email,
       password,
