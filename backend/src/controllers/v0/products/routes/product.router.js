@@ -14,6 +14,7 @@ router.get("/", (req, res) => {
       brand: "Nike",
       rating: 4.5,
       num_reviews: 10,
+      countInStock:6,
     },
   ]);
 });
@@ -29,6 +30,7 @@ router.get("/:id", (req, res) => {
     brand: "Nike",
     rating: 4.5,
     num_reviews: 10,
+    countInStock:6,
   });
 });
 
