@@ -28,4 +28,26 @@ router.post("/login", async (req, res) => {
   });
 });
 
+router.post("/register", async (req, res) => {
+  console.log(req.body);
+  const user = new User({
+    name: req.body.name,
+    email: req.body.email,
+    password: await generatePassword(req.body.password),
+  });
+
+  try {
+    const newUser = await user.save();
+    return res.send({
+      _id: newUser.id,
+      name: newUser.name,
+      email: newUser.email,
+      isAdmin: newUser.isAdmin,
+      token: getToken(newUser),
+    });
+  } catch (e) {
+    return res.status(401).send({ msg: "Invalid User Data." });
+  }
+});
+
 export const UserRouter = router;
