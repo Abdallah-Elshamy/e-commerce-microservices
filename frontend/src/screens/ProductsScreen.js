@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
 import {
   saveProduct,
   listProducts,
@@ -31,11 +30,14 @@ function ProductsScreen(props) {
   } = productSave;
 
   useEffect(() => {
+    if (successSave) {
+      setModalVisible(false);
+    }
     dispatch(listProducts());
     return () => {
       //
     };
-  }, [dispatch]);
+  }, [dispatch, successSave]);
 
   const openModal = (product) => {
     setModalVisible(true);
