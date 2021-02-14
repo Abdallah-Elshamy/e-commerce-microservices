@@ -24,7 +24,7 @@ router.post("/login", async (req, res) => {
     name: user.name,
     email: user.email,
     isAdmin: user.isAdmin,
-    token: getToken(user),
+    token: await getToken(user),
   });
 });
 
@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
       name: newUser.name,
       email: newUser.email,
       isAdmin: newUser.isAdmin,
-      token: getToken(newUser),
+      token: await getToken(newUser),
     });
   } catch (e) {
     return res.status(401).send({ msg: "Invalid User Data." });
