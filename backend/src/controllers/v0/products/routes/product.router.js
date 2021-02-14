@@ -84,4 +84,22 @@ router.put("/:id", isAuth, isAdmin, async (req, res) => {
   }
 });
 
+// Delete a product detail
+// only available if you are an admin
+router.delete("/:id", isAuth, isAdmin, async (req, res) => {
+  var deletedProduct = null;
+  try {
+    deletedProduct = await Product.findById(req.params.id).exec();
+  } catch (e) {
+    return res.status(404).send({ msg: "Product not found." });
+  }
+
+  try {
+    await deletedProduct.remove();
+    return res.status(200).send({msg: "Product was deleted"});
+  } catch (e) {
+    return res.status(500).send({ msg: "An error occurred." });
+  }
+});
+
 export const ProductRouter = router;
