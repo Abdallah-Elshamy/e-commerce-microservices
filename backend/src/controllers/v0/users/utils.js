@@ -28,12 +28,12 @@ export async function getToken(user) {
 
 export function isAuth(req, res, next) {
   if (!req.headers || !req.headers.authorization) {
-    return res.status(401).send({ message: "No authorization headers." });
+    return res.status(401).send({ msg: "No authorization headers." });
   }
 
   const token_bearer = req.headers.authorization.split(" ");
   if (token_bearer.length != 2) {
-    return res.status(401).send({ message: "Malformed token." });
+    return res.status(401).send({ msg: "Malformed token." });
   }
 
   const token = token_bearer[1];
@@ -42,7 +42,7 @@ export function isAuth(req, res, next) {
     if (err) {
       return res
         .status(500)
-        .send({ auth: false, message: "Failed to authenticate." });
+        .send({ auth: false, msg: "Failed to authenticate." });
     }
     req.user = decoded;
     return next();
@@ -53,6 +53,6 @@ export function isAdmin(req, res, next) {
   if (req.user && req.user.isAdmin) {
     return next();
   } else {
-    return res.status(401).send({ message: "Failed to authenticate Admin." });
+    return res.status(401).send({ msg: "Failed to authenticate Admin." });
   }
 }
