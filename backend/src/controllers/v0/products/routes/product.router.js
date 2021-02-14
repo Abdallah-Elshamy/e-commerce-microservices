@@ -29,7 +29,7 @@ router.get("/:id", async (req, res) => {
 
 // add a product
 // only available if you are an admin
-router.post("/", isAuth, isAdmin,async (req, res) => {
+router.post("/", isAuth, isAdmin, async (req, res) => {
   var product;
   try {
     product = new Product({
@@ -50,6 +50,34 @@ router.post("/", isAuth, isAdmin,async (req, res) => {
     const newProduct = await product.save();
     if (newProduct) {
       return res.status(201).send(newProduct);
+    }
+  } catch (e) {
+    return res.status(500).send({ msg: "An error occurred." });
+  }
+});
+
+// edit a product
+// only available if you are an admin
+router.put("/:id", isAuth, isAdmin, async (req, res) => {
+  var product = null;
+  try {
+    product = await Product.findById(req.params.id).exec();
+  } catch (e) {
+    return res.status(404).send({ msg: "Product not found." });
+  }
+  if (product) {
+    product.name = req.body.name;
+    product.price = req.body.price;
+    product.image = req.body.image;
+    product.brand = req.body.brand;
+    product.category = req.body.category;
+    product.countInStock = req.body.countInStock;
+    product.description = req.body.description;
+  }
+  try {
+    const updatedProduct = await product.save();
+    if (updatedProduct) {
+      return res.status(201).send(updatedProduct);
     }
   } catch (e) {
     return res.status(500).send({ msg: "An error occurred." });
