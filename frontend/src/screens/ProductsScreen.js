@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   saveProduct,
   listProducts,
-  deleteProdcut,
+  deleteProduct,
 } from "../actions/productAction";
 
 function ProductsScreen(props) {
@@ -29,6 +29,13 @@ function ProductsScreen(props) {
     error: errorSave,
   } = productSave;
 
+  const productDelete = useSelector((state) => state.productDelete);
+  const {
+    loading: loadingDelete,
+    success: successDelete,
+    error: errorDelete,
+  } = productDelete;
+
   useEffect(() => {
     if (successSave) {
       setModalVisible(false);
@@ -37,7 +44,7 @@ function ProductsScreen(props) {
     return () => {
       //
     };
-  }, [dispatch, successSave]);
+  }, [dispatch, successSave, successDelete]);
 
   const openModal = (product) => {
     setModalVisible(true);
@@ -66,6 +73,10 @@ function ProductsScreen(props) {
       })
     );
   };
+
+  const deleteHandler = (product) => {
+    dispatch(deleteProduct(product._id))
+  }
 
   return (
     <div className="content content-margined">
@@ -200,7 +211,12 @@ function ProductsScreen(props) {
                   <button className="button" onClick={() => openModal(product)}>
                     Edit
                   </button>
-                  <button className="button">Delete</button>
+                  <button
+                    className="button"
+                    onClick={() => deleteHandler(product)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
