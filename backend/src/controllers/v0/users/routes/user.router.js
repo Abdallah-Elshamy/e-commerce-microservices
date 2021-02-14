@@ -29,16 +29,20 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  console.log(req.body);
-  const user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: await generatePassword(req.body.password),
-  });
+  var user;
+  try {
+    user = new User({
+      name: req.body.name,
+      email: req.body.email,
+      password: await generatePassword(req.body.password),
+    });
+  } catch (e) {
+    return res.status(422).send({ msg: "Invalid User Data." });
+  }
 
   try {
     const newUser = await user.save();
-    return res.send({
+    return res.status(201).send({
       _id: newUser.id,
       name: newUser.name,
       email: newUser.email,
@@ -46,7 +50,7 @@ router.post("/", async (req, res) => {
       token: await getToken(newUser),
     });
   } catch (e) {
-    return res.status(401).send({ msg: "Invalid User Data." });
+    return res.status(500).send({ msg: "An error occurred." });
   }
 });
 
