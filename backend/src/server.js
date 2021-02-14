@@ -1,19 +1,20 @@
 import express from "express";
 import { IndexRouter } from "./controllers/v0/index.router.js"
 import cors from "cors";
-import dotenv from "dotenv";
 import mongoose from "mongoose"
-import config from "./config"
-
-dotenv.config()
+import config from "./config.js"
+import bodyParser from "body-parser"
 
 mongoose.connect(config.MONGODB_URL, {
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 })
 
 const app = express();
 
 app.use(cors());
+
+app.use(bodyParser.json())
 
 app.use("/api/v0/", IndexRouter);
 
