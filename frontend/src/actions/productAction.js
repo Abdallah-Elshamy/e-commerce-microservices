@@ -38,12 +38,25 @@ const saveProduct = (product) => async (dispatch, getState) => {
     const {
       userLogin: { userInfo },
     } = getState();
-    const { data } = await axios.post(apiEndpoint + "/products", product, {
-      headers: {
-        Authorization: "Bearer " + userInfo.token,
-      },
-    });
-    dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: data });
+    if (!product._id) {
+      const { data } = await axios.post(apiEndpoint + "/products", product, {
+        headers: {
+          Authorization: "Bearer " + userInfo.token,
+        },
+      });
+      dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: data });
+    } else {
+      const { data } = await axios.put(
+        `${apiEndpoint}/products/${product._id}`,
+        product,
+        {
+          headers: {
+            Authorization: "Bearer " + userInfo.token,
+          },
+        }
+      );
+      dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: data });
+    }
   } catch (error) {
     dispatch({ type: PRODUCT_SAVE_FAIL, payload: error.message });
   }
