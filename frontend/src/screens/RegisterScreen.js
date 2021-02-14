@@ -10,17 +10,20 @@ function LoginScreen(props) {
   const [rePassword, setRePassword] = useState("");
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, userInfo, error } = userRegister;
+  const redirect = props.location.search
+    ? props.location.search.split("=")[1]
+    : "/";
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (userInfo) {
-      props.history.push("/");
+      props.history.push(redirect);
     }
     return () => {
       //
     };
-  }, [userInfo, props.history]);
+  }, [userInfo, props.history, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -81,7 +84,7 @@ function LoginScreen(props) {
           </li>
           <li>
             Already have an account?{" "}
-            <Link to="/login" className="button secondary text-center">
+            <Link to={redirect === "/" ? "login" : `login?redirect=${redirect}`} className="button secondary text-center">
               Login
             </Link>
           </li>
