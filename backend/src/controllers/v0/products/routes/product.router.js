@@ -10,7 +10,7 @@ const router = express.Router();
 
 // Get all products
 router.get("/", async (req, res) => {
-  products = await Product.find({}, null, {
+  const products = await Product.find({}, null, {
     skip: ((req.query.page || 1) - 1) * PAGE_SIZE,
     limit: PAGE_SIZE,
   }).exec();
@@ -18,12 +18,11 @@ router.get("/", async (req, res) => {
 });
 
 // Get a product detail
-router.get("/:id", (req, res) => {
-  const product = Product.findById(req.params.id).exec();
-
-  if (product) {
-    res.send(product);
-  } else {
+router.get("/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id).exec();
+    res.status(200).send(product);
+  } catch (e) {
     res.status(404).send({ msg: "Product not found." });
   }
 });
