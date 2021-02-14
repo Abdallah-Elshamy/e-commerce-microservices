@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter, Link, Route } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
+import ProductsScreen from "./screens/ProductsScreen";
 import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
@@ -50,6 +51,7 @@ function App() {
           <div className="content">
             <Route path="/login" component={LoginScreen} />
             <Route path="/register" component={RegisterScreen} />
+            <Route path="/products" component={ProductsScreen} />
             <Route path="/product/:id" component={ProductScreen} />
             <Route path="/" exact={true} component={HomeScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
