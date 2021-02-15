@@ -1,0 +1,32 @@
+language: node_js
+node_js:
+    - 13
+services:
+    - docker
+# Pre-testing installs
+install:
+    - echo "nothing needs to be installed"
+# Scripts to be run such as tests
+before_script:
+    - echo "no tests"
+script:
+    - docker --version # print the version for logging
+    - docker build ./backend/orders-microservice -t e-commerce-orders
+    - docker build ./backend/products-microservice -t e-commerce-products
+    - docker build ./backend/users-microservice -t e-commerce-users
+    - docker build ./backend/reverseproxy-microservice -t e-commerce-reverseproxy
+
+    - docker tag e-commerce-orders abdallahelshamy/e-commerce-orders:latest
+    - docker tag e-commerce-products abdallahelshamy/e-commerce-products:latest
+    - docker tag e-commerce-users abdallahelshamy/e-commerce-users:latest
+    - docker tag e-commerce-reverseproxy abdallahelshamy/e-commerce-reverseproxy:latest
+# Tasks to perform after the process is successful. Formatting the Docker
+# username and password as below enables you to programmatically log in without
+# having the password exposed in logs.
+after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker push abdallahelshamy/e-commerce-orders
+    - docker push abdallahelshamy/e-commerce-products
+    - docker push abdallahelshamy/e-commerce-users
+    - docker push abdallahelshamy/e-commerce-reverseproxy
+    
