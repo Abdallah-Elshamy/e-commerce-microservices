@@ -33,4 +33,16 @@ router.post("/", isAuth, isAdmin, async (req, res) => {
   }
 });
 
+router.get("/", isAuth, isAdmin, async (req, res) => {
+    try {
+      const orders = await Order.find({}, null, {
+        skip: ((req.query.page || 1) - 1) * PAGE_SIZE,
+        limit: PAGE_SIZE,
+      }).exec();
+      res.status(200).send(orders)
+    } catch (e) {
+      return res.status(500).send({ msg: "An error occurred." });
+    }
+  });
+
 export const OrderRouter = router;
