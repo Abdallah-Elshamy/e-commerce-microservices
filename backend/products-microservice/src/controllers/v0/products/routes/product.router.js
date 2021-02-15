@@ -3,6 +3,7 @@ import express from "express";
 import Product from "../models/product.js";
 
 import { isAuth, isAdmin } from "../../utils.js";
+import { getGetSignedUrl, getPutSignedUrl } from "../../../../aws.js";
 
 const PAGE_SIZE = 10;
 
@@ -96,7 +97,27 @@ router.delete("/:id", isAuth, isAdmin, async (req, res) => {
 
   try {
     await deletedProduct.remove();
-    return res.status(200).send({msg: "Product was deleted"});
+    return res.status(200).send({ msg: "Product was deleted" });
+  } catch (e) {
+    return res.status(500).send({ msg: "An error occurred." });
+  }
+});
+
+// get a link to upload an image
+// only available if you are an admin
+router.post("/:id/image", isAuth, isAdmin, async (req, res) => {
+  try {
+    res.status(201).send({ uploadUrl: getPutSignedUrl(req.params.id) });
+  } catch (e) {
+    return res.status(500).send({ msg: "An error occurred." });
+  }
+});
+
+// get a link to get an image
+// only available if you are an admin
+router.get("/:id/image", isAuth, isAdmin, async (req, res) => {
+  try {
+    res.status(201).send({ imageUrl: getGetSignedUrl(req.params.id) });
   } catch (e) {
     return res.status(500).send({ msg: "An error occurred." });
   }
