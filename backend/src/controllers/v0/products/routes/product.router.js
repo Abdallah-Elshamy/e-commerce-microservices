@@ -2,7 +2,7 @@ import express from "express";
 
 import Product from "../models/product.js";
 
-import { isAuth, isAdmin } from "../../users/utils.js";
+import { isAuth, isAdmin } from "../../utils.js";
 
 const PAGE_SIZE = 10;
 

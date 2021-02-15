@@ -1,6 +1,6 @@
 import express from "express";
 import User from "../models/user.js";
-import { generatePassword, comparePasswords, getToken } from "../utils.js";
+import { generatePassword, comparePasswords, getToken } from "../../utils.js";
 
 const router = express.Router();
 
