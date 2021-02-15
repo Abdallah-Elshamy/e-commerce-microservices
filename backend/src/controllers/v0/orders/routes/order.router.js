@@ -8,5 +8,29 @@ const PAGE_SIZE = 10;
 
 const router = express.Router();
 
+router.post("/", isAuth, isAdmin, async (req, res) => {
+  var order;
+  try {
+    order = new Order({
+      user: req.user,
+      orderItems: req.body.orderItems,
+      shipping: req.body.shipping,
+      payment: req.body.payment,
+      itemsPrice: req.body.itemsPrice,
+      shippingPrice: req.body.shippingPrice,
+      taxPrice: req.body.taxPrice,
+      totalPrice: req.body.totalPrice,
+    });
+  } catch (e) {
+    return res.status(422).send({ msg: "Invalid Order Data." });
+  }
+
+  try {
+    const newOrder = await order.save();
+    return res.status(201).send(newOrder);
+  } catch (e) {
+    return res.status(500).send({ msg: "An error occurred." });
+  }
+});
 
 export const OrderRouter = router;
