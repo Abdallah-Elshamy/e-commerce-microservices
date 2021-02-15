@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import config from "../../../config.js";
+import config from "../../config.js";
 
 export async function generatePassword(plainTextPassword) {
   return bcrypt.hash(plainTextPassword, 10);

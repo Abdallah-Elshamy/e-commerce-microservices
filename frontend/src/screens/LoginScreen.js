@@ -6,19 +6,22 @@ import { login } from "../actions/userActions";
 function LoginScreen(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const userLogin = useSelector(state => state.userLogin);
+  const userLogin = useSelector((state) => state.userLogin);
   const { loading, userInfo, error } = userLogin;
+  const redirect = props.location.search
+    ? props.location.search.split("=")[1]
+    : "/";
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (userInfo) {
-        props.history.push("/");
+      props.history.push(redirect);
     }
     return () => {
       //
     };
-  }, [userInfo, props.history]);
+  }, [userInfo, props.history, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -61,7 +64,7 @@ function LoginScreen(props) {
           </li>
           <li>New to amazona?</li>
           <li>
-            <Link to="/register" className="button secondary text-center">
+            <Link to={redirect === "/" ? "register" : `register?redirect=${redirect}`} className="button secondary text-center">
               Create your amazona account
             </Link>
           </li>

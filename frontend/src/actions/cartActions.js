@@ -1,7 +1,12 @@
 import axios from "axios";
 import Cookie from "js-cookie";
 import { apiEndpoint } from "../config";
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../constants/cartConstant";
+import {
+  CART_ADD_ITEM,
+  CART_REMOVE_ITEM,
+  CART_SAVE_SHIPPING,
+  CART_SAVE_PAYMENT,
+} from "../constants/cartConstant";
 
 const addToCart = (productId, qty) => async (dispatch, getState) => {
   try {
@@ -37,4 +42,12 @@ const removeFromCart = (productId) => async (dispatch, getState) => {
   } catch (error) {}
 };
 
-export { addToCart, removeFromCart };
+const saveShipping = (data) => (dispatch) => {
+  dispatch({ type: CART_SAVE_SHIPPING, payload: data });
+};
+
+const savePayment = (data) => (dispatch) => {
+  dispatch({ type: CART_SAVE_PAYMENT, payload: data });
+};
+
+export { addToCart, removeFromCart, saveShipping, savePayment };

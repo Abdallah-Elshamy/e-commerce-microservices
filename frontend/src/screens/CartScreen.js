@@ -23,7 +23,7 @@ function CartScreen(props) {
   }, [dispatch, productId, qty]);
 
   const checkoutHandler = () => {
-    props.history.push("/signin?redirect=shipping")
+    props.history.push("/login?redirect=shipping")
   }
 
   return (
