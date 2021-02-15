@@ -107,7 +107,7 @@ router.delete("/:id", isAuth, isAdmin, async (req, res) => {
 // only available if you are an admin
 router.post("/:id/image", isAuth, isAdmin, async (req, res) => {
   try {
-    res.status(201).send({ uploadUrl: getPutSignedUrl() });
+    res.status(201).send({ uploadUrl: getPutSignedUrl(req.params.id) });
   } catch (e) {
     return res.status(500).send({ msg: "An error occurred." });
   }
@@ -117,7 +117,7 @@ router.post("/:id/image", isAuth, isAdmin, async (req, res) => {
 // only available if you are an admin
 router.get("/:id/image", isAuth, isAdmin, async (req, res) => {
   try {
-    res.status(201).send({ imageUrl: getGetSignedUrl() });
+    res.status(201).send({ imageUrl: getGetSignedUrl(req.params.id) });
   } catch (e) {
     return res.status(500).send({ msg: "An error occurred." });
   }

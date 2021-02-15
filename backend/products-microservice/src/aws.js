@@ -1,5 +1,5 @@
 import AWS from "aws-sdk";
-import { config } from "./config.js";
+import config from "./config.js";
 
 // Configure AWS
 const credentials = new AWS.SharedIniFileCredentials({
