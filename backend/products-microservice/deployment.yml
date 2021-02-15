@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: e-commerce-products
+  labels:
+    app: e-commerce-products
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: e-commerce-products
+  template:
+    metadata:
+      labels:
+        app: e-commerce-products
+    spec:
+      containers:
+      - name: e-commerce-products
+        image: abdallahelshamy/e-commerce-products
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - secretRef: 
+            name: secret-backend
+         
