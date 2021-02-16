@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: e-commerce-frontend
+  labels:
+    app: e-commerce-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: e-commerce-frontend
+  template:
+    metadata:
+      labels:
+        app: e-commerce-frontend
+    spec:
+      containers:
+      - name: e-commerce-frontend
+        image: abdallahelshamy/e-commerce-frontend
+        ports:
+        - containerPort: 8080

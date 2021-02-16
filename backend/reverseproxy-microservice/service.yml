@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: e-commerce-reverseproxy
+  name: e-commerce-reverseproxy
+spec:
+  ports:
+  - name: "8080"
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: e-commerce-reverseproxy

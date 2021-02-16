@@ -15,11 +15,13 @@ script:
     - docker build ./backend/products-microservice -t e-commerce-products
     - docker build ./backend/users-microservice -t e-commerce-users
     - docker build ./backend/reverseproxy-microservice -t e-commerce-reverseproxy
+    - docker build ./frontend -t e-commerce-frontend
 
     - docker tag e-commerce-orders abdallahelshamy/e-commerce-orders:latest
     - docker tag e-commerce-products abdallahelshamy/e-commerce-products:latest
     - docker tag e-commerce-users abdallahelshamy/e-commerce-users:latest
     - docker tag e-commerce-reverseproxy abdallahelshamy/e-commerce-reverseproxy:latest
+    - docker tag e-commerce-frontend abdallahelshamy/e-commerce-frontend:latest
 # Tasks to perform after the process is successful. Formatting the Docker
 # username and password as below enables you to programmatically log in without
 # having the password exposed in logs.
@@ -29,4 +31,5 @@ after_success:
     - docker push abdallahelshamy/e-commerce-products
     - docker push abdallahelshamy/e-commerce-users
     - docker push abdallahelshamy/e-commerce-reverseproxy
+    - docker push abdallahelshamy/e-commerce-frontend
     

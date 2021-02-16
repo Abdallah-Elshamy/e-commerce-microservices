@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: e-commerce-orders
+  labels:
+    app: e-commerce-orders
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: e-commerce-orders
+  template:
+    metadata:
+      labels:
+        app: e-commerce-orders
+    spec:
+      containers:
+      - name: e-commerce-orders
+        image: abdallahelshamy/e-commerce-orders
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - secretRef: 
+            name: secret-backend
+         

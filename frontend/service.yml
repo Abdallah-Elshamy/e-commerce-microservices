@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: e-commerce-frontend
+  labels:
+    app: e-commerce-frontend
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 3000
+    nodePort: 30000
+  selector:
+    app: e-commerce-frontend
